@@ -1,6 +1,6 @@
 package com.wayne.algorithm.array
 
-//O(2)
+//O(2) space
 fun duplicateZerosO2(arr: IntArray): IntArray {
     var des = IntArray(size = arr.size)
     var desOffset = 0
@@ -23,7 +23,7 @@ fun duplicateZerosO2(arr: IntArray): IntArray {
     return des
 }
 
-//O(1)
+//O(1) space
 fun duplicateZeros(arr: IntArray) {
     var possibleDups = 0
     var length_ = arr.size - 1
