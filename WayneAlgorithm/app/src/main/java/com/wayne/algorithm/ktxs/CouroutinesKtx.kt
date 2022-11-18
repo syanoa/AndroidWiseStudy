@@ -1,4 +1,4 @@
-package com.wayne.ktxs
+package com.wayne.algorithm.ktxs
 
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeout
@@ -16,3 +16,6 @@ suspend inline fun <T> Any.suspendCoroutineReturnWithTimeout(timeout: Long, cros
     }
     return finalValue
 }
+//suspend fun String.tryPad(){
+//    padStart()
+//}
