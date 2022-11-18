@@ -17,6 +17,8 @@ import androidx.compose.ui.platform.ComposeView
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.wayne.LockScreenOrientation
 import com.wayne.algorithm.R
+import com.wayne.algorithm.beans.Student
+import com.wayne.algorithm.beans.Teacher
 import com.wayne.algorithm.ktxs.tryFold
 import com.wayne.algorithm.ktxs.tryReduce
 import com.wayne.algorithm.ktxs.wayneLogd
@@ -55,6 +57,8 @@ fun AppContent(){
             arrayOf(it.tryFold(), it.tryReduce())
         }
         wayneLogd(" foldRes -> $foldRes    reduceRes -> $reduceRes")
+        Student("Wayne")
+        Teacher("PlayStation", 5)
     }
     Box(modifier = Modifier
         .fillMaxSize()
