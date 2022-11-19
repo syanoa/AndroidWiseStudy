@@ -9,3 +9,5 @@ fun List<Int>.tryReduce():Int =
     reduce{ acc, i ->
         acc - i
     }
+data class AssociateBean(val key:String, val value:String)
+fun List<AssociateBean>.tryAssociateToFunc():Map<String,String> = associateBy({it.key}, {it.value})
