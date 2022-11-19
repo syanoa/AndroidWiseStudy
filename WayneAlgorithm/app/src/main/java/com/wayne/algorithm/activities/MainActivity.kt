@@ -14,9 +14,11 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.wayne.LockScreenOrientation
 import com.wayne.algorithm.R
+import com.wayne.algorithm.SingletonWithParameter
 import com.wayne.algorithm.beans.Student
 import com.wayne.algorithm.beans.Teacher
 import com.wayne.algorithm.ktxs.genericsAdvancedFunction
@@ -53,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun AppContent(){
+    val ctx = LocalContext.current
     LaunchedEffect(true){
         val (foldRes, reduceRes) = listOf(1000, 100, 10, 1).let {
             arrayOf(it.tryFold(), it.tryReduce())
@@ -60,7 +63,7 @@ fun AppContent(){
         wayneLogd(" foldRes -> $foldRes    reduceRes -> $reduceRes")
         Student("Wayne")
         Teacher("PlayStation", 5)
-
+        val singletonWithParameter = SingletonWithParameter.getInstance(ctx)
     }
     Box(modifier = Modifier
         .fillMaxSize()
