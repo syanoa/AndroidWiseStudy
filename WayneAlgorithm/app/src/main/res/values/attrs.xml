@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StripLightController">
+        <!-- represents how many wicks for the strip light you want to draw-->
+        <attr name="wicksCount" format="integer" />
+        <!-- represents how many wicks a row will hold-->
+        <attr name="maxCountEveryRow" format="integer"/>
+        <!-- represents if we draw an outline border for every wick-->
+        <attr name="isBorderVisible" format="boolean"/>
+        <!-- the color of every border -->
+        <attr name="borderColor" format="color"/>
+        <!-- the thick of every border-->
+        <attr name="borderThick" format="dimension"/>
+        <!-- represents the width between every wick-->
+        <attr name="gapBetweenWicks" format="dimension"/>
+    </declare-styleable>
+</resources>
