@@ -5,5 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
-
+  <com.wayne.algorithm.widgets.StripLightController
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_marginTop="30dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:wicksCount="10"
+      app:maxCountEveryRow="4"
+      />
 </androidx.constraintlayout.widget.ConstraintLayout>

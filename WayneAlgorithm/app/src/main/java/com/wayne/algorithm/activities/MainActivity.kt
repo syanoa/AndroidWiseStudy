@@ -32,24 +32,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         wayneLogd("it's 1st activity")
-        setContentView(ComposeView(this).apply {
-            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-            setContent {
-                LockScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-                val systemUiController = rememberSystemUiController()
-                SideEffect {
-                    systemUiController.setSystemBarsColor(Color.Transparent)
-                }
-                MaterialTheme {
-//                    CompositionLocalProvider(
-//                        LocalThemeColors provides colors,
-//                        LocalSystemUiController provides systemUiController,
-//                        content = content
-//                    )
-                    AppContent()
-                }
-            }
-        })
+//        setContentView(ComposeView(this).apply {
+//            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+//            setContent {
+//                LockScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+//                val systemUiController = rememberSystemUiController()
+//                SideEffect {
+//                    systemUiController.setSystemBarsColor(Color.Transparent)
+//                }
+//                MaterialTheme {
+////                    CompositionLocalProvider(
+////                        LocalThemeColors provides colors,
+////                        LocalSystemUiController provides systemUiController,
+////                        content = content
+////                    )
+//                    AppContent()
+//                }
+//            }
+//        })
+        setContentView(R.layout.activity_main)
     }
 }
 
