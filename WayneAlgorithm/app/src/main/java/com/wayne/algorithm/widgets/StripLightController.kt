@@ -17,6 +17,7 @@ class StripLightController(ctx:Context, attrs: AttributeSet):View(ctx, attrs) {
      */
     private var wickCount:Int = 10
     private var countInRow:Int = 4
+    private var wickHeightRatio:Float = .1f //represents the ratio of wick's height to width of every rect.
 
 
     /**
@@ -77,7 +78,7 @@ class StripLightController(ctx:Context, attrs: AttributeSet):View(ctx, attrs) {
         val ROW = wickCount / countInRow + 1 // represents how many rows we are going to have 我们有多少行需要绘制
         val R_WIDTH = w / countInRow// represents the width for every single rect in drawing 每个小方块的长度
         val R_HEIGHT = h / ROW// represents the height for every single rect in drawing 每个小方块的高度
-        val S_HEIGHT = R_HEIGHT / 2 //represents the height for strip string. 灯条的高度(厚度)
+        val S_HEIGHT = R_WIDTH * wickHeightRatio //represents the height for strip string. 灯条的高度(厚度)
         val C_RATIO= S_HEIGHT / 2f //represents the ratio for every corner. 每个拐弯或者起始/终结位置的圆角半径
         val GAP_BETWEEN = C_RATIO //represents the gap between every wick. 灯芯之间的间隔
         var corner = 0//represents the index of corner we have passed by during drawing 表示在绘制过程中我们已经经过了第几个拐弯
@@ -93,7 +94,11 @@ class StripLightController(ctx:Context, attrs: AttributeSet):View(ctx, attrs) {
                     moveTo(C_RATIO, 0f)
                     wayneLogd("line to ${cRRight - C_RATIO - GAP_BETWEEN/2}")
                     lineTo(cRRight - C_RATIO - GAP_BETWEEN/2, 0f)
-                    arcTo(0f, 0f, C_RATIO, C_RATIO, 90f, 180f, false)//sweep corner
+                    lineTo(S_HEIGHT, 0f)
+//                    arcTo(0f, 0f, 2 * C_RATIO, 2 * C_RATIO, -90f, -180f, false)//sweep corner
+                    lineTo(cRRight - C_RATIO - GAP_BETWEEN/2, 0f)
+
+                    close()
 
                 }
             }else if((i + 1 + corner) % countInRow  == 0){
