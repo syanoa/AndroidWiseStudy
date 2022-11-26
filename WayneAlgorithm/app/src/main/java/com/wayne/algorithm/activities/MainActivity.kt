@@ -17,7 +17,9 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.wayne.LockScreenOrientation
+import com.wayne.algorithm.JavaSingletonStaticNestedClassWay
 import com.wayne.algorithm.R
+import com.wayne.algorithm.SingletonByLazy
 import com.wayne.algorithm.SingletonWithParameter
 import com.wayne.algorithm.beans.Student
 import com.wayne.algorithm.beans.Teacher
@@ -29,6 +31,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private var test: JavaSingletonStaticNestedClassWay? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         wayneLogd("it's 1st activity")
@@ -51,6 +55,9 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        })
         setContentView(R.layout.activity_main)
+        test = JavaSingletonStaticNestedClassWay.getInstance()
+        SingletonWithParameter.getInstance(this)
+        SingletonByLazy.instance
     }
 }
 
