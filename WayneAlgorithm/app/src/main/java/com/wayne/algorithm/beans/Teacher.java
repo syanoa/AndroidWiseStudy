@@ -1,8 +1,10 @@
 package com.wayne.algorithm.beans;
 
 import android.util.Log;
+import android.view.View;
 
 public class Teacher {
+
     static {
         Log.d("wayne_check", "static block in Teacher");
     }

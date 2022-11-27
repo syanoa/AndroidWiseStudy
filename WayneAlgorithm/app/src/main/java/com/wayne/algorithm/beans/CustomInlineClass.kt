@@ -6,6 +6,7 @@ value class CustomInlineClass(val name:String) {
     val shitCount:Int
       get() = name.length
 
+
 }
 
 inline class CustomInlineClassDeprecated(val name:String){
