@@ -1,29 +1,21 @@
 package com.wayne.algorithm.activities
 
-import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.wayne.LockScreenOrientation
 import com.wayne.algorithm.JavaSingletonStaticNestedClassWay
 import com.wayne.algorithm.R
 import com.wayne.algorithm.SingletonByLazy
 import com.wayne.algorithm.SingletonWithParameter
 import com.wayne.algorithm.beans.Student
 import com.wayne.algorithm.beans.Teacher
-import com.wayne.algorithm.ktxs.genericsAdvancedFunction
 import com.wayne.algorithm.ktxs.tryFold
 import com.wayne.algorithm.ktxs.tryReduce
 import com.wayne.algorithm.ktxs.wayneLogd
@@ -72,6 +64,7 @@ fun AppContent(){
         Student("Wayne")
         Teacher("PlayStation", 5)
         val singletonWithParameter = SingletonWithParameter.getInstance(ctx)
+
     }
     Box(modifier = Modifier
         .fillMaxSize()
