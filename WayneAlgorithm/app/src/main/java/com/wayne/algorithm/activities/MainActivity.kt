@@ -20,6 +20,10 @@ import com.wayne.algorithm.ktxs.tryFold
 import com.wayne.algorithm.ktxs.tryReduce
 import com.wayne.algorithm.ktxs.wayneLogd
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -28,28 +32,40 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         wayneLogd("it's 1st activity")
-//        setContentView(ComposeView(this).apply {
-//            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-//            setContent {
-//                LockScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-//                val systemUiController = rememberSystemUiController()
-//                SideEffect {
-//                    systemUiController.setSystemBarsColor(Color.Transparent)
-//                }
-//                MaterialTheme {
-////                    CompositionLocalProvider(
-////                        LocalThemeColors provides colors,
-////                        LocalSystemUiController provides systemUiController,
-////                        content = content
-////                    )
-//                    AppContent()
+        setContentView(ComposeView(this).apply {
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            setContent {
+                LockScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                val systemUiController = rememberSystemUiController()
+                SideEffect {
+                    systemUiController.setSystemBarsColor(Color.Transparent)
+                }
+                MaterialTheme {
+//                    CompositionLocalProvider(
+//                        LocalThemeColors provides colors,
+//                        LocalSystemUiController provides systemUiController,
+//                        content = content
+//                    )
+                    AppContent()
+                }
+            }
+        })
+//        setContentView(R.layout.activity_main)
+//        test = JavaSingletonStaticNestedClassWay.getInstance()
+//        SingletonWithParameter.getInstance(this)
+//        SingletonByLazy.instance
+//        runBlocking {
+//            val scope0 = this
+//
+//            scope0.launch {
+//               val scope1 = this
+//                scope1.launch {
+//                    coroutineContext[Job]
 //                }
 //            }
-//        })
-        setContentView(R.layout.activity_main)
-        test = JavaSingletonStaticNestedClassWay.getInstance()
-        SingletonWithParameter.getInstance(this)
-        SingletonByLazy.instance
+//
+//        }
+
     }
 }
 
