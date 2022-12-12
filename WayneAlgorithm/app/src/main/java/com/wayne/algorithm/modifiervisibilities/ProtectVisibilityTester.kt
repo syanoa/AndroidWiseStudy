@@ -42,5 +42,6 @@ class SubclassTester : PropertyVisibilityTester(){
 
 }
 fun test(){
+    val javaProtectedName = JavaProtectedTester().name //the protected variable in a java class is package-visible therefore it can be visited here, but can't be visited outside this package
 //    PropertyVisibilityTester().parentField1 //This is not allowed because in Kotlin protected is class-access and subclass-access
 }

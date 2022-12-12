@@ -38,6 +38,7 @@ import com.wayne.algorithm.SingletonWithParameter
 import com.wayne.algorithm.beans.Student
 import com.wayne.algorithm.beans.Teacher
 import com.wayne.algorithm.ktxs.*
+import com.wayne.algorithm.modifiervisibilities.JavaProtectedTester
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
