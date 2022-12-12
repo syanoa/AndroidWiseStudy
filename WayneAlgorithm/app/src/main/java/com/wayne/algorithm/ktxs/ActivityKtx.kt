@@ -1,6 +1,7 @@
 package com.wayne.algorithm.ktxs
 
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.view.View
@@ -38,6 +39,38 @@ inline fun ComponentActivity.launchAndRepeatOnLifecycle(
         }
     }
 }
+
+fun <T : Activity> Activity.toNextPage(nextActivity: Class<T>, extras: Intent.() -> Unit = {}) {
+    val intent = Intent(this, nextActivity).apply {
+        extras()
+//        putExtra(KEY_PAGE_TAG, pageTag)
+    }
+    startActivity(intent)
+}
+
+//fun <T : Activity> BaseActivity.toNextPageForResult(
+//    nextActivity: Class<T>,
+//    onResult: (Int, Intent?) -> Unit,
+//    extras: Intent.() -> Unit = {}
+//) {
+//    val intent = Intent(this, nextActivity).apply {
+//        extras()
+//        putExtra(KEY_PAGE_TAG, pageTag)
+//    }
+//    onActivityResult = onResult
+//    resultLauncher.launch(intent)
+//}
+
+inline fun <reified T : Activity> Activity.toNextPage(noinline extras: Intent.() -> Unit = {}) {
+    toNextPage(T::class.java, extras)
+}
+
+//inline fun <reified T : Activity> BaseActivity.toNextPageForResult(
+//    noinline extras: Intent.() -> Unit = {},
+//    noinline onResult: (Int, Intent?) -> Unit
+//) {
+//    toNextPageForResult(T::class.java, onResult, extras)
+//}
 
 
 
