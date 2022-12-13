@@ -19,6 +19,7 @@ private val mPrivateMemberForInlineTest = "private"
 
 @PublishedApi //@PublishedApi annotation is only applicable for internal declaration
 internal val mPublishedApiMember = "publishedApi"
+internal val mInternalApiMember = "internalApi"
 
 val defaultPublicMember = "publicMember"
 
@@ -31,9 +32,13 @@ val defaultPublicMember = "publicMember"
  */
 inline fun inlineFunction(crossinline mLambda:()->Unit){
     //ERROR:Public-API inline function cannot access non-public-API 'private val mPrivateMemberForInlineTest
+    //HINT: but a private inline function can access non-public-API
 //    mPrivateMemberForInlineTest.length
+    //mInternalApiMember.length
+
     mPublishedApiMember.length
     defaultPublicMember.length
+
     normalFunction {
         mLambda()
     }
