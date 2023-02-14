@@ -19,4 +19,5 @@ public class JavaSingletonStaticNestedClassWay {
     public static JavaSingletonStaticNestedClassWay getInstance(){
         return LazyHolder.instance;
     }
+
 }
