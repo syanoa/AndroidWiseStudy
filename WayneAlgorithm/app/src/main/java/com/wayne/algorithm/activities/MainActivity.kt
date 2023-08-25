@@ -1,13 +1,7 @@
 package com.wayne.algorithm.activities
 
-import android.Manifest
 import android.app.Activity
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.le.ScanCallback
-import android.bluetooth.le.ScanResult
 import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
@@ -25,10 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.wayne.LockScreenOrientation
 import com.wayne.algorithm.JavaSingletonStaticNestedClassWay
@@ -39,6 +36,7 @@ import com.wayne.algorithm.beans.Student
 import com.wayne.algorithm.beans.Teacher
 import com.wayne.algorithm.ktxs.*
 import com.wayne.algorithm.modifiervisibilities.JavaProtectedTester
+import com.wayne.algorithm.snapshots.SnaptShotManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
@@ -90,8 +88,8 @@ class MainActivity : AppCompatActivity() {
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AppNav(){
-    val navController = rememberAnimatedNavController()
-    AnimatedNavHost(navController = navController, "1st"){
+    val navController = rememberNavController()
+    NavHost(navController = navController, "1st"){
         router("1st"){
             AppContent(navController)
         }
@@ -112,18 +110,24 @@ fun AppContent(navController: NavHostController){
     var rememberInput = remember {
         rememberV
     }
-    val rememberUpdatedState by rememberUpdatedState(rememberV)
-
-    LaunchedEffect(true){
-        val (foldRes, reduceRes) = listOf(1000, 100, 10, 1).let {
-            arrayOf(it.tryFold(), it.tryReduce())
-        }
-        wayneLogd(" foldRes -> $foldRes    reduceRes -> $reduceRes")
-        Student("Wayne")
-        Teacher("PlayStation", 5)
-        val singletonWithParameter = SingletonWithParameter.getInstance(ctx)
-
+    var rememberChanges = remember {
+        0
     }
+    val rememberUpdatedState by rememberUpdatedState(rememberV)
+    LaunchedEffect(Unit){
+       SnaptShotManager().doSomething()
+    }
+
+//    LaunchedEffect(true){
+//        val (foldRes, reduceRes) = listOf(1000, 100, 10, 1).let {
+//            arrayOf(it.tryFold(), it.tryReduce())
+//        }
+//        wayneLogd(" foldRes -> $foldRes    reduceRes -> $reduceRes")
+//        Student("Wayne")
+//        Teacher("PlayStation", 5)
+//        val singletonWithParameter = SingletonWithParameter.getInstance(ctx)
+//
+//    }
 //    LaunchedEffect(state1){
 //        wayneLogd("launched effect state1 and report state2 -> $state2")
 //    }
@@ -131,6 +135,7 @@ fun AppContent(navController: NavHostController){
 //        wayneLogd("launched effect state2-> $state2")
 //        wayneLogd("launched effect state3-> $state3")
 //    }
+
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Color.Red),  horizontalAlignment = Alignment.CenterHorizontally) {
@@ -145,9 +150,45 @@ fun AppContent(navController: NavHostController){
         Button(onClick = { navController.navigate("2nd")}) {
             Text(text = "to 2nd composable")
         }
+        Button(onClick = {
+            rememberChanges++
+        }) {
+            Text(text = "change the high order functions")
+        }
+        DisposableEffectLearning(onStart = {
+            wayneLogd("disposableEffect onStart value $rememberChanges")
+        }, onStop = {
+            wayneLogd("disposableEffect onStop value $rememberChanges")
+        })
     }
 }
+@Composable
+fun DisposableEffectLearning(onStart:()->Unit, onStop:()->Unit){
+    val lifeCycleOwner = LocalLifecycleOwner.current
+//    val currentOnStart by rememberUpdatedState(newValue = onStart)
+//    val currentOnStop by rememberUpdatedState(newValue = onStop)
+    DisposableEffect(lifeCycleOwner){
 
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_START) {
+//                currentOnStart()
+                onStart()
+            } else if (event == Lifecycle.Event.ON_STOP) {
+//                currentOnStop()
+                onStop()
+            }else if(event == Lifecycle.Event.ON_DESTROY){
+                wayneLogd("disposableEffect lifecycle onDestroy")
+            }
+        }
+            wayneLogd("disposableEffect addLifecycleObserver ")
+        lifeCycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            wayneLogd("disposableEffect removeLifecycleObserver ")
+            lifeCycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+    Text(text = "Inner text")
+}
 class SomeFactory{
     suspend fun produceSomething():String = withContext(Dispatchers.IO){
          "brand new thing"

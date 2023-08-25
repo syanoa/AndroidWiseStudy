@@ -108,9 +108,9 @@ class StripLightController(ctx:Context, attrs: AttributeSet):View(ctx, attrs) {
         }
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
         canvas?.drawPath(wickPaths[0], wickPaints[0])
     }
+
 }

@@ -1,41 +1,43 @@
 package com.wayne.algorithm.ktxs
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
-import com.google.accompanist.navigation.animation.composable
+import androidx.navigation.compose.composable
 
-@ExperimentalAnimationApi
 fun NavGraphBuilder.router(
     route: String,
     arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),
     durationMillis: Int = 400,
-    enterTransition: (AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition) = {
+    enterTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition)  = {
         slideIntoContainer(
-            AnimatedContentScope.SlideDirection.Left,
+            AnimatedContentTransitionScope.SlideDirection.Left,
             animationSpec = tween(durationMillis)
         )
     },
-    exitTransition: (AnimatedContentScope<NavBackStackEntry>.() -> ExitTransition) = {
+    exitTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition) = {
         slideOutOfContainer(
-            AnimatedContentScope.SlideDirection.Left,
+            AnimatedContentTransitionScope.SlideDirection.Left,
             animationSpec = tween(durationMillis)
         )
     },
-    popEnterTransition: (AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition) = {
+    popEnterTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition) = {
         slideIntoContainer(
-            AnimatedContentScope.SlideDirection.Right,
+            AnimatedContentTransitionScope.SlideDirection.Right,
             animationSpec = tween(durationMillis)
         )
     },
-    popExitTransition: (AnimatedContentScope<NavBackStackEntry>.() -> ExitTransition) = {
+    popExitTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition) = {
         slideOutOfContainer(
-            AnimatedContentScope.SlideDirection.Right,
+            AnimatedContentTransitionScope.SlideDirection.Right,
             animationSpec = tween(durationMillis)
         )
     },

@@ -96,7 +96,7 @@ suspend fun Pair<Double, Double>.getAddressByLon2Lat(appContext: Context): Strin
     val geocoder = Geocoder(appContext, Locale.getDefault())
     return@withContext this@getAddressByLon2Lat.let { (lon, lat) ->
         geocoder.getFromLocation(lat, lon, 1).let {
-            if (it.isEmpty()) {
+            if (it.isNullOrEmpty()) {
                 "Unknown"
             } else {
                 it[0].getAddressLine(0)
